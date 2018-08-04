@@ -1,6 +1,9 @@
+from datetime import datetime
 import sys
 import time
 from threading import Thread
+
+from pytz import timezone
 from mqtt_base import MQTTBase
 from interpolater import Interpolater
 
@@ -39,6 +42,7 @@ class Redshift(MQTTBase):
         self._interpolater = Interpolater(self.SCHEDULE)
 
         self._topic_prefix = self.mqtt_config['topic_prefix']
+        self._timezone = timezone(self.mqtt_config['timezone'])
         self._keepon = True
         self._thread = None
         self._previous_values = {}
@@ -69,7 +73,7 @@ class Redshift(MQTTBase):
 
     def _worker(self):
         while self._keepon:
-            entry = self._interpolater.interpolate_now()
+            entry = self._interpolater.interpolate_now(datetime.now(self._timezone))
             self._publish_entry(entry)
             i = 2
             while self._keepon and i > 0:

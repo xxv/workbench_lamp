@@ -21,8 +21,8 @@ class Interpolater(object):
 
         return self.interpolate_entries(prev, self._schedule[0], when)
 
-    def interpolate_now(self):
-        return self.interpolate(time.strftime(self.TIME_FORMAT))
+    def interpolate_now(self, now):
+        return self.interpolate(now.strftime(self.TIME_FORMAT))
 
     @staticmethod
     def interpolate_entries(lower, higher, target):
