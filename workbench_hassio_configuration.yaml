@@ -1,0 +1,13 @@
+  - platform: mqtt
+    name: "Workbench Lamp"
+    command_topic: "lamp/1234567a/switch/on"
+    state_topic: "lamp/1234567a/switch/status"
+    payload_on: "on"
+    payload_off: "off"
+    brightness_command_topic: "lamp/1234567a/brightness/set"
+    brightness_state_topic: "lamp/1234567a/brightness/status"
+    color_temp_command_topic: "lamp/1234567a/temperature/set"
+    color_temp_state_topic: "lamp/1234567a/temperature/status"
+    optimistic: false
+    availability_topic: "lamp/1234567a/availability"
+    retain: true
