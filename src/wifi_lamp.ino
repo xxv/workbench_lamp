@@ -146,6 +146,8 @@ void reconnect() {
       client.publish(light_id_availability.c_str(), "online", 1);
     } else {
       digitalWrite(STATUS_LED, 1);
+      // don't thrash reconnects
+      delay(1000);
     }
   }
 }
