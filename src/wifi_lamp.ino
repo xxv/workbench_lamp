@@ -38,7 +38,7 @@ WiFiManager wifiManager;
 Ticker animationTicker;
 
 #ifdef LANTERN_USE_SSL
-WiFiClientSecure wifi;
+BearSSL::WiFiClientSecure wifi;
 #else
 WiFiClient wifi;
 #endif
@@ -111,6 +111,8 @@ void setup() {
     device_mode = normal;
     digitalWrite(STATUS_LED, 1);
   }
+
+  wifi.setInsecure();
 
   WiFi.macAddress(mac);
   sprintf(device_id, "%02x%02x%02x%02x", mac[2], mac[3], mac[4], mac[5]);
